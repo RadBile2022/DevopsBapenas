@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karsajobs-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: karsajobs-backend
+  template:
+    metadata:
+      labels:
+        app: karsajobs-backend
+    spec:
+      containers:
+      - name: karsajobs-backend
+        image: radar511/karsajobs:latest
+        ports:
+        - containerPort: 3000
+
