@@ -13,7 +13,7 @@ pipeline {
         stage ('Build docker image'){
             steps {
                 script {
-                    sh 'docker build -t radar511/java-book .'
+                    sh 'sudo docker build -t radar511/java-book .'
                 }
             }
         }
@@ -21,9 +21,9 @@ pipeline {
             steps{
                 script{
                 withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
-                    sh 'docker login -u radar511 -p ${dockerhubpwd}'
+                    sh 'sudo docker login -u radar511 -p ${dockerhubpwd}'
                     
-                    sh 'docker push radar511/java-book'
+                    sh 'sudo docker push radar511/java-book'
                 }
                     
                 }
