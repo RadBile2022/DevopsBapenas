@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'mvn 3.5.0'
+        maven 'mvn 3.9'
     }
     stages {
         stage ('Build Maven'){
@@ -13,7 +13,7 @@ pipeline {
         stage ('Build docker image'){
             steps {
                 script {
-                    sh 'docker build -t radar511/devops-integration .'
+                    sh 'docker build -t radar511/java-book .'
                 }
             }
         }
@@ -23,7 +23,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
                     sh 'docker login -u radar511 -p ${dockerhubpwd}'
                     
-                    sh 'docker push radar511/devops-integration'
+                    sh 'docker push radar511/java-book'
                 }
                     
                 }
